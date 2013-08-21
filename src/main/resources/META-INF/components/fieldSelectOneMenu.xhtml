@@ -21,15 +21,7 @@
         for="#{id}Text"
         mode="#{web:nvl(fieldMode, 1)}"
         rendered="#{web:nvl(rendered, true)}"
-        addMessage="true">
-
-        <!-- <p:selectOneMenu
-            id="#{id}Text"
-            value="#{value}"
-            required="#{web:nvl(required, false)}"
-            disabled="#{web:nvl(disabled, false)}"
-            rendered="#{not web:nvl(readOnly, false)}"
-            style="width: #{width};">  -->
+        addMessage="#{addMessage}">
 
         <p:selectOneMenu
             id="#{id}Text"
