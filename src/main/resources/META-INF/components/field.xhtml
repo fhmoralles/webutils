@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:web="http://www.web.com.br/jsf/webutils">
+
+	<!--
+
+    Tag que implementa um panelGroup contendo 3 panelGroup:
+    	1. panelGroup que mostrar o label do componente e se é requerido ou não
+    	2. panelGroup que permite inserir o componente desejado
+    	3. panelGroup que mostra as mensagens para o componente
+    	
+     TAG ATTRIBUTES:
+
+               for: indica o componente na qual o label se refere - OBRIGATÓRIO
+        
+             label: label do componente - OBRIGATÓRIO
+        
+          rendered: Indica se será renderizado - OPCIONAL (default = true)
+        
+              mode: define a classe de CSS usada pelo componente - OPCIONAL (default = 1)
+        
+          required: Indica se é obrigatório - OPCIONAL (default = false)
+		
+		addMessage: se irá mostrar as mensagens para o componente - OPCIONAL (default = false)
+	
+      -->
+	
+	<p:outputPanel id="#{for}#{web:nvl(addMessage, false) ? '' : 'OutPut'}" autoUpdate="true">
+	
+		<h:panelGroup layout="block" rendered="#{web:nvl(rendered, true)}" styleClass="field-#{web:nvl(mode, 1)}">
+	
+			<h:panelGroup layout="block" styleClass="field-label-#{web:nvl(mode, 1)}">
+			
+				<h:outputLabel value="#{label}" for="#{for}" />
+				<h:outputLabel value="#{web:nvl(required, false) ? '*' : ''}" style="color: red;" rendered="#{web:nvl(label, false)}" />
+
+			</h:panelGroup>
+	
+			<h:panelGroup layout="block" styleClass="field-container-#{web:nvl(mode, 1)}">
+	
+				<ui:insert />
+	
+			</h:panelGroup>
+			
+			<!-- <p:message rendered="#{web:nvl(addMessage, false)}" for="#{for}#{web:nvl(addMessage, false) ? 'Text' : ''}" id="#{for}_message" display="text" redisplay="true" />  -->
+	
+			<web:clear />
+				
+		</h:panelGroup>
+		
+	</p:outputPanel>
+
+</ui:composition>
+
+

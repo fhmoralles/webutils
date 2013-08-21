@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:web="http://www.web.com.br/jsf/webutils">
+
+	<!--
+
+    Tag que implementa uma inputText próprio para valores monetários,
+     usando o componente do Primefaces, dentro de um <web:field>
+
+
+    ATRIBUTOS:
+
+        id: Id - OBRIGATÓRIO
+        label: Label - OBRIGATÓRIO
+        value: Valor - OBRIGATÓRIO
+        maxlength: Máximo de caracteres permitido - OPCIONAL (default = 100)
+        fieldMode: Atributo mode da tag <web:field> - OPCIONAL (default = 1)
+        required: Indica se é obrigatório - OPCIONAL (default = false)
+        rendered: Indica se será renderizado - OPCIONAL (default = true)
+        readOnly: Indica se o campo será somente leitura - OPCIONAL (default = false)
+
+     -->
+	<web:field label="#{label}" for="#{id}" mode="#{web:nvl(fieldMode, 1)}"
+		required="#{web:nvl(required, false)}"
+		rendered="#{web:nvl(rendered, true)}" addMessage="true">
+
+		<p:inputText id="#{id}Text" value="#{value}"
+			required="#{web:nvl(required, false)}"
+			rendered="#{not web:nvl(readOnly, false)}"
+			disabled="#{web:nvl(disabled, false)}"
+			maxlength="#{web:nvl(maxlength, 100)}"
+			style="width: #{width}; text-align: right;"
+			onkeyup="inputCurrency_corrigeValor(this,'#{localeUI.currencySymbol}','#{web:nvl(maxlength, 100)}')">
+
+			<f:convertNumber for="#{id}" type="currency"
+				locale="#{localeUI.locale}" />
+				
+			<ui:insert />
+
+		</p:inputText>
+
+		<h:outputText value="#{value}" rendered="#{web:nvl(readOnly, false)}" />
+
+	</web:field>
+
+</ui:composition>
+

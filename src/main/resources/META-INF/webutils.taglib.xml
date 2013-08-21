@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE facelet-taglib PUBLIC "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+                                "facelet-taglib_1_0.dtd">
+<facelet-taglib>
+
+	<namespace>http://www.web.com.br/jsf/webutils</namespace>
+
+	<tag>
+		<tag-name>clear</tag-name>
+		<source>components/clear.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>column</tag-name>
+		<source>components/column.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>comboField</tag-name>
+		<source>components/comboField.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>commandButton</tag-name>
+		<source>components/commandButton.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>dataTable</tag-name>
+		<source>components/dataTable.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>emptySelectItem</tag-name>
+		<source>components/emptySelectItem.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>enumSelectItems</tag-name>
+		<source>components/enumSelectItems.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>field</tag-name>
+		<source>components/field.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>fieldCalendar</tag-name>
+		<source>components/fieldCalendar.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>fieldInputCurrency</tag-name>
+		<source>components/fieldInputCurrency.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>fieldInputText</tag-name>
+		<source>components/fieldInputText.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>fieldMask</tag-name>
+		<source>components/fieldMask.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>fieldPassword</tag-name>
+		<source>components/fieldPassword.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>fieldSelectOneMenu</tag-name>
+		<source>components/fieldSelectOneMenu.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>outputTextField</tag-name>
+		<source>components/outputTextField.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>searchResultDataTable</tag-name>
+		<source>components/searchResultDataTable.xhtml</source>
+	</tag>
+		<tag>
+		<tag-name>searchOptionsPanel</tag-name>
+		<source>components/searchOptionsPanel.xhtml</source>
+	</tag>
+			
+	<function>
+		<function-name>nvl</function-name>
+		<function-class>br.com.webutils.FaceletsFunctions</function-class>
+		<function-signature>java.lang.Object nvl(java.lang.Object,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<function-name>messageEnum</function-name>
+		<function-class>br.com.webutils.FaceletsFunctions</function-class>
+		<function-signature>java.lang.String messageEnum(java.lang.Enum)</function-signature>
+	</function>
+	<function>
+		<function-name>concat</function-name>
+		<function-class>br.com.webutils.FaceletsFunctions</function-class>
+		<function-signature>java.lang.String concat(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+	
+</facelet-taglib>

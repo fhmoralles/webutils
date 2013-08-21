@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:web="http://www.web.com.br/jsf/webutils">
+
+    <!--
+
+    Tag que implementa uma inputText usando o componente do Primefaces, dentro de um <web:field>
+
+    -->
+
+    <web:field
+        label="#{label}"
+        for="#{id}Text"
+        mode="#{web:nvl(fieldMode, 1)}"
+        rendered="#{web:nvl(rendered, true)}"
+        addMessage="true">
+
+        <!-- <p:selectOneMenu
+            id="#{id}Text"
+            value="#{value}"
+            required="#{web:nvl(required, false)}"
+            disabled="#{web:nvl(disabled, false)}"
+            rendered="#{not web:nvl(readOnly, false)}"
+            style="width: #{width};">  -->
+
+        <p:selectOneMenu
+            id="#{id}Text"
+            value="#{value}"
+	        required="#{web:nvl(required, false)}"
+            disabled="#{web:nvl(disabled, false)}"
+            rendered="#{not web:nvl(readOnly, false)}"
+            style="width: #{width};">
+
+            <web:emptySelectItem />
+            <ui:insert />
+
+        </p:selectOneMenu>
+
+        <h:outputText
+            value="#{readOnlyValue}"
+            rendered="#{web:nvl(readOnly, false)}" />
+
+    </web:field>
+
+</ui:composition>
+

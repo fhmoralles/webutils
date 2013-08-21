@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:consult="http://www.consult.com.br/jsf/consultutils"
+	xmlns:web="http://www.web.com.br/jsf/webutils">
+
+
+	<!--
+
+     TAG ATTRIBUTES:
+
+               id:
+            
+            value:
+         
+         rendered:
+         
+            width:
+            
+         labelMsg: 
+         
+         required: 
+         
+            align:
+         
+      -->
+
+	<h:panelGroup rendered="#{web:nvl(rendered, true)}">
+
+		<div style="padding-left: 2px; padding-right: 4px; padding-top: 4px; border: 0px solid red;">
+			<h:outputLabel value="${labelMsg}" for="#{id}" style="font-weight:bold" />
+		</div>
+
+		<div style="float: left; width: #{width}; text-align: #{align}; ">
+		
+			<h:outputLabel value="#{web:nvl(required, false) ? '* ' : ''}" style="color: red;" />
+			<h:outputText id="#{id}" value="#{value}" />
+		
+		</div>
+
+	</h:panelGroup>
+	
+</ui:composition>
+

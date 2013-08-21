@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $NO_CHECK -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:web="http://www.web.com.br/jsf/webutils">
+
+	<!--
+
+    TAG ATTRIBUTES:
+
+		id
+		action
+        fieldMode
+        value
+        title
+        image
+        immediate
+        rendered
+        disabled
+        update
+		process
+		oncomplete
+		onclick
+		style
+		styleClass
+		ajax
+		type
+		
+     -->
+
+    <p:commandButton id="#{id}"
+        action="#{action}"
+        actionListener="#{actionListener}"
+        value="#{value}"
+        title="#{title}"
+        icon="#{image}"
+        immediate="#{web:nvl(immediate, false)}"
+        rendered="#{web:nvl(rendered, true)}"
+        disabled="#{disabled}"
+        update="#{update}"
+        process="#{process}"
+        oncomplete="#{oncomplete}"
+        onclick="#{onclick}"
+        style="#{style}"
+        styleClass="#{styleClass}"
+        ajax="#{web:nvl(ajax, true)}"
+        type="#{web:nvl(type, submit)}">
+
+        <ui:insert/>
+
+     </p:commandButton>
+
+     <h:outputText id="#{id}_ajax" value="#{web:nvl(ajax, 'true')}" style="display: none;"/>
+
+</ui:composition>
+
+

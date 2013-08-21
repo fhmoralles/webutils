@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:web="http://www.web.com.br/jsf/webutils">
+
+
+	<fieldset id="#{id}"
+		style="display: #{not empty backingBean.rows?'block':'none'}">
+
+		<web:dataTable id="#{id}" rendered="#{not empty backingBean.rows}"
+			value="#{backingBean.rows}" styleClass="dataTable-#{web:nvl(mode, 1)}"
+			rowStyleClass="#{rowStyleClass}" mode="#{mode}"
+			scrollable="#{scrollable}" scrollWidth="#{scrollWidth}">
+
+			<ui:define name="columns">
+				<!-- Opções -->
+				<web:column id="#{id}OptionsCol" align="center" width="90px"
+					title="#{messages['global.options.title']}">
+
+					<h:panelGroup style="white-space: nowrap">
+
+						<!-- =========================================================================================== -->
+						<!-- Botões utilizados em modo dialog -->
+						<!-- =========================================================================================== -->
+
+						<web:commandButton id="#{id}cbtnEdit" value="#{null}"
+							image="#{messages['global.operations.edit.icon']}"
+							title="#{messages['global.operations.edit']}" update="dialogs"
+							process="@this" oncomplete="editDialog.show()"
+							rendered="#{backingBean.dialogMode and backingBean.editable}"
+							action="prepareEdit" securityKey="#{securityKey}"
+							securityAction="A" backingBean="#{backingBean}">
+
+							<f:setPropertyActionListener value="#{dataTableItem}"
+								target="#{backingBean.bean}" />
+
+						</web:commandButton>
+
+						<web:commandButton id="#{id}cbtnDel" value="#{null}"
+							image="#{messages['global.operations.delete.icon']}"
+							title="#{messages['global.operations.delete']}" immediate="true"
+							oncomplete="deleteDialog.show()" update="dialogs"
+							rendered="#{backingBean.dialogMode and backingBean.deletable}"
+							process="@this" action="" securityKey="#{securityKey}"
+							securityAction="R" backingBean="#{backingBean}">
+
+							<f:setPropertyActionListener value="#{dataTableItem}"
+								target="#{backingBean.bean}" />
+
+						</web:commandButton>
+
+						<!-- =========================================================================================== -->
+						<!-- Botões utilizados em modo convencional -->
+						<!-- =========================================================================================== -->
+
+						<web:commandButton id="#{id}cbtnEditC" value="#{null}"
+							image="#{messages['global.operations.edit.icon']}"
+							title="#{messages['global.operations.edit']}"
+							rendered="#{not backingBean.dialogMode and backingBean.editable}"
+							action="prepareEdit" immediate="true" ajax="false"
+							securityKey="#{securityKey}" securityAction="A"
+							backingBean="#{backingBean}">
+
+							<f:setPropertyActionListener value="#{dataTableItem}"
+								target="#{backingBean.bean}" />
+
+						</web:commandButton>
+
+						<web:commandButton id="#{id}cbtnDelC" value="#{null}"
+							image="#{messages['global.operations.delete.icon']}"
+							title="#{messages['global.operations.delete']}" immediate="true"
+							oncomplete="deleteDialog.show()" update="dialogs"
+							rendered="#{not backingBean.dialogMode and backingBean.deletable}"
+							process="@this" securityKey="#{securityKey}" securityAction="R"
+							backingBean="#{backingBean}" action="prepareDelete">
+
+							<f:setPropertyActionListener value="#{dataTableItem}"
+								target="#{backingBean.bean}" />
+
+						</web:commandButton>
+
+						<web:commandButton id="#{id}cbtnViewC" value="#{null}"
+							image="#{messages['global.operations.view.icon']}"
+							title="#{messages['global.operations.view']}"
+							rendered="#{not backingBean.dialogMode and backingBean.viewable}"
+							action="prepareDetail" immediate="true" ajax="false"
+							securityKey="#{securityKey}" securityAction="C"
+							backingBean="#{backingBean}">
+
+							<f:setPropertyActionListener value="#{dataTableItem}"
+								target="#{backingBean.bean}" />
+
+						</web:commandButton>
+
+					</h:panelGroup>
+
+				</web:column>
+
+				<ui:insert />
+			</ui:define>
+
+		</web:dataTable>
+
+	</fieldset>
+
+	<p:dialog id="#{id}DeleteDialog"
+		header="#{web:nvl(deleteMessage,messages['global.msg.confirmar_exclusao'])}"
+		widgetVar="deleteDialog" resizable="false" modal="true">
+		<p:commandButton value="#{messages['global.yes']}"
+			action="#{backingBean.delete}" immediate="true" ajax="false"
+			update="@form msg" oncomplete="#deleteDialog.hide()"
+			id="deleteDialog_btnYes">
+		</p:commandButton>
+
+		<p:commandButton value="#{messages['global.no']}"
+			onclick="deleteDialog.hide()" id="deleteDialog_btnNo" />
+	</p:dialog>
+
+</ui:composition>
