@@ -243,6 +243,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 
 	public void reset() {
 
+		LOG.info("reset UI");
 		if (filter != null) {
 			filter.reset();
 		}
@@ -292,6 +293,8 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	protected abstract void saveImpl(E bean) throws Exception;
 
 	public void search() {
+		
+		LOG.info("search filter: " + filter.isValid());
 		if (filter.isValid()) {
 			rows = searchImpl(filter);
 

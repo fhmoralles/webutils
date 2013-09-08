@@ -7,7 +7,7 @@
 	
 	<groupId>br.com.projects.utils</groupId>
 	<artifactId>webutils</artifactId>
-	<version>1.0.0-ALPHA</version>
+	<version>1.0.0-Final</version>
 	<packaging>jar</packaging>
 	
 	<dependencies>
