@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:web="http://www.web.com.br/jsf/webutils">
+
+	<!--
+
+    Painel com as opções de busca.
+
+    ATRIBUTOS:
+
+        id: ID - OBRIGATÓRIO
+        backingBean - EL que representa o UI Bean - OBRIGATÓRIO
+        showOnly - Indica se exibirá opções de filtro - OPCIONAL (default = false)
+        readOnly - Indica se exibirá opção de inclusão - OPCIONAL (default = false)
+        rendered: Indica se será renderizado - OPCIONAL (default = true)
+
+     -->
+
+	<fieldset id="#{id}" style="padding: 10px;">
+
+		<legend style="font-weight: bold; font-size: 16px; width: auto;">#{messages['global.filtros.fieldset']}</legend>
+
+		<ui:insert name="searchContent" />
+
+		<web:clear />
+
+		<h:panelGrid columns="2">
+
+			<web:outputTextField id="btnIncluirLabel" value=".:" required="false"
+				width="120px" align="right" />
+
+			<web:field label="" mode="#{mode}">
+
+				<p:commandButton id="#{id}SearchBtn" action="#{backingBean.search}"
+					value="#{messages['global.msg.search']}"
+					title="#{messages['global.msg.search']}" icon="ui-icon-search"
+					rendered="#{not web:nvl(showOnly, false)}" update="@form msg"
+					process="@form" style="margin-right: 5px;"
+					oncomplete="if(typeof(dataTable) != 'undefined') dataTable.getPaginator().setPage(0);" />
+
+				<p:commandButton id="#{id}ResetBtn" action="#{backingBean.prepareSearch}"
+					value="#{messages['global.msg.reset']}"
+					title="#{messages['global.msg.reset']}" icon="ui-icon-cancel"
+					rendered="#{not web:nvl(showOnly, false)}" update="@form msg"
+					ajax="true" process="@this" style="margin-right: 5px;" />
+
+				<p:commandButton id="#{id}CreateBtn"
+					action="#{backingBean.prepareCreate}" style="margin-right: 5px;"
+					value="#{messages['global.msg.novoregistro']}"
+					title="#{messages['global.msg.novoregistro']}"
+					icon="#{messages['global.operations.create.icon']}"
+					rendered="#{backingBean.insertable}" ajax="true" immediate="true" />
+
+			</web:field>
+
+		</h:panelGrid>
+
+	</fieldset>
+
+</ui:composition>
+
+

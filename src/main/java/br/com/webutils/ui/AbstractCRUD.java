@@ -19,6 +19,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	public static final String GLOBAL_MSG_SAVE = "global.msg.save";
 	public static final String GLOBAL_MSG_UPDATE = "global.msg.update";
 	public static final String GLOBAL_MSG_SEARCH_NOT_FOUND = "global.msg.search_not_found";
+	public static final String GLOBAL_MSG_INVALIDBEAN = "global.msg.invalidbean";
 	
 	private static final Logger LOG = Logger.getLogger(AbstractCRUD.class);
 	
@@ -52,8 +53,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 
 	public String backToSearch() {
 		mode = Mode.SEARCH;
-
-		return getActionSearch();
+		return prepareSearch();
 	}
 
 	private void cleanUp() {
@@ -81,8 +81,13 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 		}
 	}
 
-	protected abstract void deleteImpl(E bean);
+	protected abstract void deleteImpl(E bean) throws Exception;
 
+	/**
+	 * Retorna a menagem de exclusão.
+	 */
+	protected abstract String getMsgDelete();
+	
 	/**
 	 * Retorna a action a ser utilizada na inserção.
 	 */
@@ -103,6 +108,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	 */
 	protected abstract String getActionSearch();
 
+	
 	public E getBean() {
 		return bean;
 	}
@@ -239,11 +245,11 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 
 		mode = Mode.SEARCH;
 		return getActionSearch();
+		
 	}
 
 	public void reset() {
 
-		LOG.info("reset UI");
 		if (filter != null) {
 			filter.reset();
 		}

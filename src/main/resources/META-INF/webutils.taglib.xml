@@ -66,7 +66,15 @@
 		<tag-name>outputTextField</tag-name>
 		<source>components/outputTextField.xhtml</source>
 	</tag>
-			
+	<tag>
+		<tag-name>searchOptionsPanel</tag-name>
+		<source>components/searchOptionsPanel.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>searchResultDataTable</tag-name>
+		<source>components/searchResultDataTable.xhtml</source>
+	</tag>
+					
 	<function>
 		<function-name>nvl</function-name>
 		<function-class>br.com.webutils.FaceletsFunctions</function-class>

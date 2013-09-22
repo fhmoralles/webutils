@@ -35,11 +35,10 @@
      -->
 
     <p:commandButton id="#{id}"
-        action="#{action}"
-        actionListener="#{actionListener}"
+        action="#{backingBean[action]}"
         value="#{value}"
         title="#{title}"
-        icon="#{image}"
+        icon="#{icon}"
         immediate="#{web:nvl(immediate, false)}"
         rendered="#{web:nvl(rendered, true)}"
         disabled="#{disabled}"
@@ -55,8 +54,6 @@
         <ui:insert/>
 
      </p:commandButton>
-
-     <h:outputText id="#{id}_ajax" value="#{web:nvl(ajax, 'true')}" style="display: none;"/>
 
 </ui:composition>
 
