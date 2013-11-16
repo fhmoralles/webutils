@@ -88,7 +88,7 @@
 
 		<p:commandButton value="#{messages['global.yes']}"
 			action="#{backingBean.delete}" 
-			update="@form msg" oncomplete="#deleteDialog.hide()"
+			update="@form" oncomplete="#deleteDialog.hide()"
 			id="deleteDialog_btnYes" />
 
 		<p:commandButton value="#{messages['global.no']}" immediate="true"

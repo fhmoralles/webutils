@@ -7,6 +7,10 @@
 	<namespace>http://www.web.com.br/jsf/webutils</namespace>
 
 	<tag>
+		<tag-name>breadcrumb</tag-name>
+		<source>components/breadcrumb.xhtml</source>
+	</tag>
+	<tag>
 		<tag-name>clear</tag-name>
 		<source>components/clear.xhtml</source>
 	</tag>
@@ -61,6 +65,10 @@
 	<tag>
 		<tag-name>fieldSelectOneMenu</tag-name>
 		<source>components/fieldSelectOneMenu.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>fieldTextarea</tag-name>
+		<source>components/fieldTextarea.xhtml</source>
 	</tag>
 	<tag>
 		<tag-name>outputTextField</tag-name>

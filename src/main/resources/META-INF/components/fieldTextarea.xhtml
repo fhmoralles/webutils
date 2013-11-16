@@ -14,18 +14,16 @@
 
     <!--
 
-    Tag que implementa um calendar usando o componente do Primefaces, dentro de um <web:field>
+    Tag que implementa uma textarea usando o componente do Primefaces, dentro de um <web:field>
 
     ATRIBUTOS:
 
         id: Id - OBRIGATÓRIO
         label: Label - OBRIGATÓRIO
         value: Valor - OBRIGATÓRIO
-        maxlength: Máximo de caracteres permitido - OPCIONAL (default = 100)
         fieldMode: Atributo mode da tag <web:field> - OPCIONAL (default = 1)
         required: Indica se é obrigatório - OPCIONAL (default = false)
         rendered: Indica se será renderizado - OPCIONAL (default = true)
-        readOnly: Indica se o campo será somente leitura - OPCIONAL (default = false)
 
      -->
 
@@ -37,27 +35,20 @@
         rendered="#{web:nvl(rendered, true)}"
         addMessage="#{addMessage}">
 
-        <!-- $NO_CHECK -->
-        <p:calendar
+        <p:inputTextarea
             id="#{id}Text"
-            locale="pt_BR"
+            autoResize="false"
+            rows="#{web:nvl(rows, 6)}"
+            readonly="#{readonly}"
+            style="width: #{width}"
             value="#{value}"
-            showOn="#{web:nvl(showOn, 'button')}"
-            pattern="${messages['global.date_pattern']}"
+            disabled="#{web:nvl(disabled, false) or web:nvl(readOnly, false)}"
             required="#{web:nvl(required, false)}"
-            mindate="#{mindate}"
-            maxdate="#{maxdate}"
-            disabled="#{disabled}"
-            navigator="true"
-            yearRange="#{web:nvl(yearRange, '2000:2020')}"
-            size="#{size}"
-            maxlength="10"
-            style="width: #{width};">
+            onkeyup="this.value=this.value.substring(0, 4096)">
 
             <ui:insert />
 
-        </p:calendar>
-        <!-- $CHECK -->
+        </p:inputTextarea>
 
     </web:field>
 

@@ -2,6 +2,9 @@ package br.com.webutils.ui;
 
 import java.io.Serializable;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
 import br.com.webutils.MessageUtil;
 
 public abstract class AbstractFacesBean implements Serializable {
@@ -20,4 +23,28 @@ public abstract class AbstractFacesBean implements Serializable {
 		MessageUtil.addGlobalWarnMessage(key, params);
 	}
 
+	public String getRequestURL() {
+		
+		Object request = FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		if (request instanceof HttpServletRequest) {
+			return ((HttpServletRequest) request).getRequestURL().toString();
+		} else {
+			return "";
+		}
+		
+	}
+
+	public String getRequestParameter(String parameter) {
+		
+		Object request = FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		if (request instanceof HttpServletRequest) {
+			return ((HttpServletRequest) request).getParameter(parameter);
+		} else {
+			return "";
+		}
+		
+	}
+	
 }

@@ -12,17 +12,17 @@ import br.com.webutils.ui.filter.Filter;
 public abstract class AbstractCRUD<E, F extends Filter> extends
 		AbstractFacesBean implements Serializable {
 
-	
 	public static final String GLOBAL_MSG_DELETE = "global.msg.delete";
 	public static final String GLOBAL_MSG_ERROR_DELETE = "global.msg.error.delete";
 	public static final String GLOBAL_MSG_SELECT = StringUtils.EMPTY;
 	public static final String GLOBAL_MSG_SAVE = "global.msg.save";
+	public static final String GLOBAL_MSG_ERROR = "global.msg.error";
 	public static final String GLOBAL_MSG_UPDATE = "global.msg.update";
 	public static final String GLOBAL_MSG_SEARCH_NOT_FOUND = "global.msg.search_not_found";
 	public static final String GLOBAL_MSG_INVALIDBEAN = "global.msg.invalidbean";
-	
+
 	private static final Logger LOG = Logger.getLogger(AbstractCRUD.class);
-	
+
 	// -- Constantes
 
 	protected enum Mode {
@@ -74,7 +74,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 				info(GLOBAL_MSG_DELETE);
 			}
 			return prepareSearch();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
 			error(GLOBAL_MSG_ERROR_DELETE);
 			return null;
@@ -87,7 +87,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	 * Retorna a menagem de exclusão.
 	 */
 	protected abstract String getMsgDelete();
-	
+
 	/**
 	 * Retorna a action a ser utilizada na inserção.
 	 */
@@ -108,7 +108,6 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	 */
 	protected abstract String getActionSearch();
 
-	
 	public E getBean() {
 		return bean;
 	}
@@ -137,7 +136,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	 * 
 	 * @return
 	 */
-	//public abstract boolean isDialogMode();
+	// public abstract boolean isDialogMode();
 
 	/**
 	 * Indica se a operação de edição estará habilitada.
@@ -167,7 +166,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	 * 
 	 * @return
 	 */
-	//protected abstract boolean isMultipleInsertion();
+	// protected abstract boolean isMultipleInsertion();
 
 	/**
 	 * Indica se a operação de busca estará habilitada.
@@ -212,7 +211,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 		cleanUp();
 		mode = Mode.CREATE;
 		bean = newInstance();
-		
+
 		return getActionCreate();
 	}
 
@@ -237,15 +236,15 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 
 	public String prepareSearch() {
 
-		reset();
-
 		if (!isSearchable() || isSearchOnPrepare()) {
 			search();
+		} else {
+			reset();			
 		}
 
 		mode = Mode.SEARCH;
 		return getActionSearch();
-		
+
 	}
 
 	public void reset() {
@@ -269,20 +268,18 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	public String save() {
 
 		if (isValidBean(bean)) {
-			
+
 			try {
 				saveImpl(bean);
-	
+
 				if (isInserting()) {
 					info(GLOBAL_MSG_SAVE);
 				} else {
 					info(GLOBAL_MSG_UPDATE);
 				}
-	
-				// Realiza a busca novamente e volta para os resultados
-				// search();
+
 				return backToSearch();
-				
+
 			} catch (Exception e) {
 				LOG.error(e.getMessage(), e);
 			}
@@ -299,11 +296,9 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 	protected abstract void saveImpl(E bean) throws Exception;
 
 	public void search() {
-		
-		LOG.info("search filter: " + filter.isValid());
+
 		if (filter.isValid()) {
 			rows = searchImpl(filter);
-
 			if (rows == null || rows.isEmpty()) {
 				resetRows();
 				if (getMode() == Mode.SEARCH) {
