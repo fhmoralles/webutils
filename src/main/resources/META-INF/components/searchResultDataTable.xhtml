@@ -16,7 +16,7 @@
 		<legend style="font-weight: bold; font-size: 16px; width: auto;">#{messages['global.resultados.fieldset']}</legend>
 
 		<web:dataTable id="#{id}" rendered="#{not empty backingBean.rows}"
-			value="#{backingBean.rows}"
+			value="#{backingBean.rows}" style="#{style}"
 			styleClass="dataTable-#{web:nvl(mode, 1)}"
 			rowStyleClass="#{rowStyleClass}" mode="#{mode}"
 			scrollable="#{scrollable}" scrollWidth="#{scrollWidth}">
