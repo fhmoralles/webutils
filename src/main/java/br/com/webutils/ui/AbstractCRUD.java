@@ -257,6 +257,7 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 		resetRows();
 		cleanUp();
 
+		System.out.println("***** reset: " + rows + " filter: " + filter );
 	}
 
 	/**
@@ -301,37 +302,37 @@ public abstract class AbstractCRUD<E, F extends Filter> extends
 
 	public void search() {
 
-		LOG.info("1");
+//		LOG.info("1");
 		if (filter.isValid()) {
-			LOG.info("2");
+//			LOG.info("2");
 			rows = searchImpl(filter);
-			LOG.info("3");
+//			LOG.info("3");
 			if (rows == null || rows.isEmpty()) {
-				LOG.info("4");
+//				LOG.info("4");
 				resetRows();
-				LOG.info("5");
+//				LOG.info("5");
 				if (getMode() == Mode.SEARCH) {
-					LOG.info("6");
+//					LOG.info("6");
 					warn(GLOBAL_MSG_SEARCH_NOT_FOUND);
-					LOG.info("7");
+//					LOG.info("7");
 				}
-				LOG.info("8");
+//				LOG.info("8");
 			}
-			LOG.info("9");
+//			LOG.info("9");
 		} else {
-			LOG.info("10");
+//			LOG.info("10");
 			final String validationMessage = filter.getValidationMessage();
-			LOG.info("11");
+//			LOG.info("11");
 			if (StringUtils.isNotBlank(validationMessage)) {
-				LOG.info("12");
+//				LOG.info("12");
 				error(filter.getValidationMessage());
-				LOG.info("13");
+//				LOG.info("13");
 			}
-			LOG.info("14");
+//			LOG.info("14");
 			resetRows();
-			LOG.info("15");
+//			LOG.info("15");
 		}
-		LOG.info("16");
+//		LOG.info("16");
 	}
 
 	/**

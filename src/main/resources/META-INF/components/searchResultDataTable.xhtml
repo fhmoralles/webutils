@@ -24,7 +24,8 @@
 			<ui:define name="columns">
 
 				<web:column id="#{id}OptionsCol" align="center" width="90px"
-					title="#{messages['global.options.title']}">
+					title="#{messages['global.options.title']}"
+					rendered="#{backingBean.editable or backingBean.viewable or backingBean.deletable}">
 
 					<h:panelGroup style="white-space: nowrap">
 
